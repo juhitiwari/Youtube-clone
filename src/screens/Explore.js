@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text,StyleSheet } from 'react-native';
+import Header from '../components/Header';
 
 class Explore extends Component {
 
@@ -7,7 +8,7 @@ class Explore extends Component {
   render() {
     return (
       <View>
-        <Text> Explore </Text>
+        <Header/>
       </View>
     );
   }

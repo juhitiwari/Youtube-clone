@@ -7,14 +7,14 @@ class MiniCard extends Component {
     return (
       <View style={styles.container}>
         <Image
-        source={{uri:"https://images.unsplash.com/photo-1496425745709-5f9297566b46?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"}}
+        source={{uri:`https://i.ytimg.com/vi/${this.props.videoId}/hqdefault.jpg`}}
         style={styles.cardImage}/>
 
         <View style={styles.content}>
             <Text ellipsizeMode="tail"
             numberOfLines={3}
-            style={styles.text}>fehfiqhowhfeh</Text>
-            <Text style={{fontSize:12}}>fer</Text>
+    style={styles.text}>{this.props.title}</Text>
+            <Text style={{fontSize:12}}>{this.props.channel}</Text>
         </View>
 
       </View>
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     },
     text:{
         width:Dimensions.get("screen").width/2,
-        fontSize:18
+        fontSize:15
     },
     container:{
         flexDirection:'row',

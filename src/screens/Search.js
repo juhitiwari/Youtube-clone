@@ -1,45 +1,81 @@
-import React, { Component } from 'react';
-import { View, Text, TextInput,StyleSheet } from 'react-native';
+import React, { Component,useState} from 'react';
+import { View, Text, TextInput,StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import MiniCard from '../components/MiniCard';
 import { ScrollView } from 'react-native-gesture-handler';
+import Constants from 'expo-constants'
+import {useSelector,useDispatch} from 'react-redux'
 
- class Search extends Component {
 
-    state={
-        value:""
+
+
+
+const Search =({navigation})=> {
+
+
+    const [value,setValue] = useState("")
+    // const [miniCardData,setMiniCard] = useState([])
+    const dispatch = useDispatch()
+    const miniCardData = useSelector(state=>{
+        return state
+    })
+    const [loading,setLoading] = useState(false)
+
+    const fetchData=()=>{
+        setLoading(true)
+        fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${value}&type=video&key=AIzaSyA3yNOOZX0_TLxMT2mmm8QXVykYSGf_5PQ`)
+        .then(res=>res.json())
+        .then(data=>{
+           
+            console.log(data.items)
+            setLoading(false)
+            //this.setState({miniCardData:data.items})
+            dispatch({type:"add_video",payload:data.items})
+
+        })
+        .catch(function(eror){
+            console.log(eror.message)
+            throw eror
+        })
     }
 
 
-  render() {
+  
     return (
       <View style={{flex:1}}>
 
           <View style={styles.header}>
               <Ionicons
               name="md-arrow-back"
-              size={32}/>
+              size={32}
+              onPress={()=>navigation.goBack()}/>
               <TextInput
-              onChangeText={(text)=>this.setState({value:text})}
-              value={this.state.value}
+              onChangeText={(text)=>setValue(text)}
+              value={value}
               style={styles.input}/>
               <Ionicons
               name="md-send"
-              size={32}/>
+              size={32}
+              onPress={()=>fetchData()}/>
           </View>
-            <ScrollView>
-            <MiniCard/>
-            <MiniCard/>
-            <MiniCard/>
-            <MiniCard/>
-            <MiniCard/>
-            <MiniCard/>
-            <MiniCard/>
-            </ScrollView>
+
+          {loading?<ActivityIndicator style={{marginTop:10}} size="large" color="red"/>:null}
+
+          <FlatList
+          data={miniCardData}
+          renderItem={({item})=>{
+              return <MiniCard
+              videoId={item.id.videoId}
+              title={item.snippet.title}
+              channel={item.snippet.channelTitle}/>
+          }}
+          keyExtractor={item=>item.id.videoId}/>
+            
+           
       </View>
     );
   }
-}
+
 
 const styles = StyleSheet.create({
     header:{
@@ -48,6 +84,7 @@ const styles = StyleSheet.create({
         justifyContent:'space-around',
         borderBottomColor:"#D8D9DB",
         borderBottomWidth:1,
+        marginTop:Constants.statusBarHeight
         
 
     },
@@ -57,6 +94,7 @@ const styles = StyleSheet.create({
     }
  
 });
+
 
 export default Search
 

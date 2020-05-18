@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text,StyleSheet } from 'react-native';
+import { View, Text,StyleSheet, Button } from 'react-native';
 import {Entypo, Ionicons, MaterialIcons} from '@expo/vector-icons'
+import Constants from 'expo-constants'
+import { useNavigation ,useTheme} from '@react-navigation/native';
 
-export default class Header extends Component {
+export default function Header(){
 
+    const navigation = useNavigation()
 
-  render() {
+ 
     return (
       <View style={styles.header}>
         <View style={{flexDirection:'row',margin:5}}>
@@ -24,7 +27,8 @@ export default class Header extends Component {
             <Ionicons
             name="md-search"
             size={32}
-            color='#212121'/>
+            color='#212121'
+            onPress={()=>navigation.navigate('search')}/>
             <MaterialIcons
             name="account-circle"
             size={32}
@@ -34,7 +38,7 @@ export default class Header extends Component {
       </View>
     );
   }
-}
+
 
 const styles = StyleSheet.create({
     header:{
@@ -44,6 +48,7 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         borderBottomColor:"#D8D9DB",
         borderBottomWidth:1,
+        marginTop:Constants.statusBarHeight
         
     },
     headerText:{
