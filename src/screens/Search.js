@@ -5,6 +5,7 @@ import MiniCard from '../components/MiniCard';
 import { ScrollView } from 'react-native-gesture-handler';
 import Constants from 'expo-constants'
 import {useSelector,useDispatch} from 'react-redux'
+import { useTheme } from '@react-navigation/native';
 
 
 
@@ -12,12 +13,16 @@ import {useSelector,useDispatch} from 'react-redux'
 
 const Search =({navigation})=> {
 
+    const {colors}=useTheme()
+    const mycolor=colors.iconColor
+
+
 
     const [value,setValue] = useState("")
     // const [miniCardData,setMiniCard] = useState([])
     const dispatch = useDispatch()
     const miniCardData = useSelector(state=>{
-        return state
+        return state.cardData
     })
     const [loading,setLoading] = useState(false)
 
@@ -29,7 +34,6 @@ const Search =({navigation})=> {
            
             console.log(data.items)
             setLoading(false)
-            //this.setState({miniCardData:data.items})
             dispatch({type:"add_video",payload:data.items})
 
         })
@@ -44,10 +48,11 @@ const Search =({navigation})=> {
     return (
       <View style={{flex:1}}>
 
-          <View style={styles.header}>
+          <View style={[styles.header,{backgroundColor:colors.headerColor}]}>
               <Ionicons
               name="md-arrow-back"
               size={32}
+              color={mycolor}
               onPress={()=>navigation.goBack()}/>
               <TextInput
               onChangeText={(text)=>setValue(text)}
@@ -56,6 +61,7 @@ const Search =({navigation})=> {
               <Ionicons
               name="md-send"
               size={32}
+              color={mycolor}
               onPress={()=>fetchData()}/>
           </View>
 

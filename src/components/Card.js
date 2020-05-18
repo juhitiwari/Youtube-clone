@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useNavigation,useTheme } from '@react-navigation/native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const Card= (props)=> {
  
-
+    const navigation=useNavigation()
+    const {colors}=useTheme()
+    const mycolor=colors.iconColor
 
     return (
-      <View style={styles.container}>
+      <View style={styles.container}
+      >
+          <TouchableOpacity onPress={()=>navigation.navigate('videoplayer',{videoId:props.videoId,title:props.title})}>
         <Image
         source={{uri:`https://i.ytimg.com/vi/${props.videoId}/hqdefault.jpg`}}
         style={styles.cardImage}/>
@@ -16,21 +22,21 @@ const Card= (props)=> {
             <MaterialIcons
             name="account-circle"
             size={32}
-            color='#212121'/>
+            color="#404040"/>
             <View style={{marginLeft:10}}>
-                <Text style={styles.text}
+                <Text style={[styles.text,{color:mycolor}]}
                 ellipsizeMode="tail"
             numberOfLines={1}>
                     {props.title}
                 </Text>
-                <Text>
+                <Text style={{color:mycolor}}>
                     {props.channel}
                 </Text>
 
             </View>
         </View>
         
-
+        </TouchableOpacity>
 
       </View>
       

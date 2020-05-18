@@ -1,12 +1,17 @@
-import { createStore } from "redux";
-import reducers from "../reducers";
+import { createStore, combineReducers } from "redux";
+import {reducer} from "../reducers/reducer";
+import { themeReducer } from "../reducers/themeReducer";
 
 
 
 
 
 const store=createStore(
-    reducers
+    combineReducers({
+        cardData:reducer,
+        myDarkMode:themeReducer
+
+    })
 
 )
 

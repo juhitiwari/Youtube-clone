@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 export default function Home () {
 
     const cardData=useSelector(state=>{
-        return state
+        return state.cardData
     })
 
 
