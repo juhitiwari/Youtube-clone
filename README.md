@@ -1,6 +1,6 @@
 # Youtube-clone
 
-<img src="https://github.com/juhitiwari/Youtube-clone/blob/master/images/ya1.jpg" width="300" height="500" />        <img src="https://github.com/juhitiwari/Youtube-clone/blob/master/images/ya2.jpg" width="300" height="500" />
+<img src="https://github.com/juhitiwari/Youtube-clone/blob/master/images/ya1.jpg" width="300" height="500" />        <img src="https://github.com/juhitiwari/Youtube-clone/blob/master/images/ya2.jpg" width="300" height="500" /> <br/>
 <img src="https://github.com/juhitiwari/Youtube-clone/blob/master/images/ya3.gif" width="300" height="500" />        <img src="https://github.com/juhitiwari/Youtube-clone/blob/master/images/ya4.gif" width="300" height="500" />
 
 Youtube-clone is an attempt to clone the basic functionality of Youtube using React Native, Expo and the Youtube developers API.
